@@ -1,0 +1,416 @@
+/* 1- Variables Globales */
+
+:root{
+    --color-fondo: #f5f6fa;
+    --color-superficie: #ffffff;
+    --color-texto: #202533;
+    --color-borde: #e8eaf0;
+    --color-primario: #6558d3;
+
+    --color-pendiente: #64748b;
+    --color-progreso: #e9a23b;
+    --color-completada: #26a296;
+
+    --radio: 12px;
+    --sombra: 0 3px 12px rgba(25, 35, 60, 0.04);
+}
+
+/* 2- Configuracion General */
+*{
+    box-sizing: border-box;
+}
+
+body{
+   margin: 0;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;    
+}
+
+button,
+input,
+select,
+textarea{
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container{
+    max-width: 1440px;  
+}
+
+/* 3- Encabezado */
+header {
+    background-color: var(--color-superficie);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+header .container{
+    min-height: 76px;
+}
+
+header h1{
+    margin: 0;
+    color: var(--color-texto);
+    font-size: 23px;
+    font-weight: 750;
+    letter-spacing: -0.7px;
+}
+
+header .bi-kanban {
+    color: var(--color-primario);
+    font-size: 27px;
+}
+
+header p{
+    margin: 3px 0 0;
+    color: var(--color-secundario);
+    font-size: 12px;
+}
+
+/* 4- Botones */
+
+.btn {
+    border-radius: 9px;
+    font-weight: 600;
+    transition: background-color 0.2s ease, 
+        transform 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+.btn-primary:hover {
+    background-color: #5144bd;
+    border-color: #5144bd;
+    transform: translateY(-1px);
+}
+
+.btn-outline-secondary {
+    border-color: var(--color-borde);
+    color: var(--color-secundario);
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f1f2f8;
+    border-color: #d9dce6;
+    color: var(--color-texto);
+}
+
+
+/* 5- Formulario de nueva tarea */
+#formulario-collapse{
+    margin-bottom: 24px;
+}
+
+#form-tarea {
+    padding: 24px;
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+#form-tarea label {
+    margin-bottom: 7px;
+    color: var(--color-texto);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.form-control,
+.form-select {
+    min-height: 42px;
+   border: 1px solid #e0e3eb;
+   border-radius: 8px;
+   background-color: #fff;
+   color: var(--color-texto);
+   font-size: 13px;
+}
+
+textarea.form-control{
+    min-width: 90px;
+    resize: vertical;
+}
+
+.form-control:focus,
+.form-select:focus{
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(101, 88, 211, 0.12);
+}
+
+/* 6- Barra de busqueda y filtros */
+
+#busqueda {
+    padding-left: 14px;
+}
+
+#busqueda::placeholder {
+    color: #9ba1ae;
+}
+
+#filtro-prioridad,
+#filtro-estado{
+    min-width: 155px;
+}
+
+/* 7- Tablero Kanban */
+#tablero {
+    align-items: flex-start;
+}
+
+.kanban-columna{
+    min-width: 0;
+    min-height: 360;
+    padding: 18px;
+    background-color: #eef0f5;
+    border: 1px solid #e9ebf1;
+    border-radius: var(--radio);
+}
+
+/* Encabazado de cada columna */
+.kanban-columna h2,
+.kanban-columna h3 {
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.estado-punto {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.punto-pendiente {
+    background-color: var(--color-pendiente);
+}
+
+.punto-progreso {
+    background-color: var(--color-progreso);
+}
+
+.punto-completada {
+    background-color: var(--color-completada);
+}   
+
+/* Contadores de tareas */
+#contador-pendiente,
+#contador-progreso,
+#contador-completada {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 25px;
+    height: 25px;
+    padding: 0 7px;
+    background-color: #ffffff;
+    border: 1px solid var(--color-borde);
+    border-radius: 7px;
+    color: var(--color-secundario);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Contenedor de las tarjetas */
+.lista-tareas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 250px;
+    margin-top: 18px;
+}
+
+/* 8. Tarjetas de tareas
+   Estas clases se utilizarán desde tablero.js */
+.tarjeta-tarea {
+    padding: 16px;
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: 10px;
+    box-shadow: var(--sombra);
+    overflow-wrap: anywhere;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.tarjeta-tarea:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(25, 35, 60, 0.08);
+}
+
+.tarjeta-tarea h3 {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.tarjeta-tarea p {
+    margin-bottom: 12px;
+    color: var(--color-secundario);
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* 9. Etiquetas de prioridad */
+.prioridad {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.prioridad-alta {
+    background-color: #fff0f0;
+    color: #cf4141;
+}
+
+.prioridad-media {
+    background-color: #fff5df;
+    color: #a86b0a;
+}
+
+.prioridad-baja {
+    background-color: #e8f7ef;
+    color: #238653;
+}
+
+/* 10. Fecha y acciones de cada tarea */
+.fecha-tarea {
+    color: var(--color-secundario);
+    font-size: 11px;
+}
+
+.acciones-tarea {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f1f5;
+}
+
+.acciones-tarea button,
+.acciones-tarea select {
+    padding: 5px 8px;
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    background-color: #fff;
+    color: var(--color-secundario);
+    font-size: 11px;
+}
+
+.acciones-tarea button:hover {
+    background-color: #f3f2ff;
+    color: var(--color-primario);
+}
+
+.acciones-tarea .btn-eliminar:hover {
+    background-color: #fff0f0;
+    color: #cf4141;
+}
+
+/* 11. Tareas completadas */
+.tarea-completada h3 {
+    color: #8b91a0;
+    text-decoration: line-through;
+}
+
+.tarea-completada {
+    opacity: 0.8;
+}
+
+/* 12. Mensajes para columnas vacías */
+.mensaje-vacio {
+    padding: 28px 12px;
+    color: #969cab;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* 13. Diseño adaptable para tabletas */
+@media (max-width: 991.98px) {
+    .kanban-columna {
+        padding: 14px;
+    }
+
+    #filtro-prioridad,
+    #filtro-estado {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .tarjeta-tarea {
+        padding: 13px;
+    }
+}
+
+/* 14. Diseño adaptable para móviles */
+@media (max-width: 767.98px) {
+    header .container {
+        min-height: 68px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    header .bi-kanban {
+        font-size: 24px;
+    }
+
+    #form-tarea {
+        padding: 16px;
+    }
+
+    #tablero {
+        row-gap: 18px;
+    }
+
+    .kanban-columna {
+        min-height: 180px;
+        padding: 16px;
+    }
+
+    .lista-tareas {
+        min-height: 100px;
+    }
+
+    .filtros-kanban {
+        gap: 10px;
+    }
+
+    .filtros-kanban > * {
+        width: 100%;
+    }
+
+    #filtro-prioridad,
+    #filtro-estado {
+        width: 100%;
+    }
+}
+
+/* 15. Accesibilidad: movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
