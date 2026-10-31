@@ -4,6 +4,7 @@
     --color-fondo: #f5f6fa;
     --color-superficie: #ffffff;
     --color-texto: #202533;
+    --color-secundario: #64748b;
     --color-borde: #e8eaf0;
     --color-primario: #6558d3;
 
@@ -169,7 +170,7 @@ textarea.form-control{
 
 .kanban-columna{
     min-width: 0;
-    min-height: 360;
+    min-height: 360px;
     padding: 18px;
     background-color: #eef0f5;
     border: 1px solid #e9ebf1;
@@ -248,13 +249,6 @@ textarea.form-control{
     box-shadow: 0 6px 18px rgba(25, 35, 60, 0.08);
 }
 
-.tarjeta-tarea h3 {
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.45;
-}
-
 .tarjeta-tarea p {
     margin-bottom: 12px;
     color: var(--color-secundario);
@@ -264,15 +258,6 @@ textarea.form-control{
 }
 
 /* 9. Etiquetas de prioridad */
-.prioridad {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 9px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 700;
-}
-
 .prioridad-alta {
     background-color: #fff0f0;
     color: #cf4141;
@@ -288,12 +273,7 @@ textarea.form-control{
     color: #238653;
 }
 
-/* 10. Fecha y acciones de cada tarea */
-.fecha-tarea {
-    color: var(--color-secundario);
-    font-size: 11px;
-}
-
+/* 10. Acciones de cada tarea */
 .acciones-tarea {
     display: flex;
     align-items: center;
@@ -319,22 +299,7 @@ textarea.form-control{
     color: var(--color-primario);
 }
 
-.acciones-tarea .btn-eliminar:hover {
-    background-color: #fff0f0;
-    color: #cf4141;
-}
-
-/* 11. Tareas completadas */
-.tarea-completada h3 {
-    color: #8b91a0;
-    text-decoration: line-through;
-}
-
-.tarea-completada {
-    opacity: 0.8;
-}
-
-/* 12. Mensajes para columnas vacías */
+/* 11. Mensajes para columnas vacías */
 .mensaje-vacio {
     padding: 28px 12px;
     color: #969cab;
@@ -390,14 +355,6 @@ textarea.form-control{
         min-height: 100px;
     }
 
-    .filtros-kanban {
-        gap: 10px;
-    }
-
-    .filtros-kanban > * {
-        width: 100%;
-    }
-
     #filtro-prioridad,
     #filtro-estado {
         width: 100%;
@@ -412,5 +369,213 @@ textarea.form-control{
         scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
+    }
+}
+
+
+
+/* Drag & Drop */
+
+.tarjeta-tarea {
+    cursor: grab;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tarjeta-tarea:active {
+    cursor: grabbing;
+}
+
+.tarjeta-tarea.arrastrando {
+    opacity: 0.4;
+    transform: scale(0.96);
+}
+
+.lista-tareas {
+    min-height: 120px;
+    transition: background-color 0.2s ease;
+}
+
+.lista-tareas:has(.tarjeta-tarea.arrastrando) {
+    background-color: rgba(13, 110, 253, 0.04);
+}
+
+/* Tema oscuro */
+body[data-tema="oscuro"] {
+    --color-fondo: #141821;
+    --color-superficie: #202633;
+    --color-texto: #e7eaf0;
+    --color-secundario: #a3adbd;
+    --color-borde: #343d4c;
+    --color-primario: #9b8cff;
+    --sombra: 0 3px 12px rgba(0, 0, 0, 0.2);
+    --bs-body-bg: var(--color-fondo);
+    --bs-body-color: var(--color-texto);
+    --bs-body-color-rgb: 231, 234, 240;
+    --bs-secondary-color: var(--color-secundario);
+    --bs-secondary-color-rgb: 163, 173, 189;
+    color-scheme: dark;
+}
+
+body[data-tema="oscuro"] header,
+body[data-tema="oscuro"] .bg-white,
+body[data-tema="oscuro"] .input-group-text {
+    background-color: var(--color-superficie) !important;
+    color: var(--color-texto) !important;
+}
+
+body[data-tema="oscuro"] .text-dark {
+    color: var(--color-texto) !important;
+}
+
+body[data-tema="oscuro"] .kanban-columna {
+    background-color: #1a202b;
+    border-color: var(--color-borde);
+}
+
+body[data-tema="oscuro"] .form-control,
+body[data-tema="oscuro"] .form-select,
+body[data-tema="oscuro"] .acciones-tarea button,
+body[data-tema="oscuro"] .acciones-tarea select {
+    background-color: #171d27;
+    border-color: #414b5c;
+    color: var(--color-texto);
+}
+
+body[data-tema="oscuro"] .form-control::placeholder {
+    color: #8994a6;
+}
+
+body[data-tema="oscuro"] #filtro-prioridad,
+body[data-tema="oscuro"] #filtro-estado {
+    color-scheme: dark;
+}
+
+body[data-tema="oscuro"] #contador-pendiente,
+body[data-tema="oscuro"] #contador-progreso,
+body[data-tema="oscuro"] #contador-completada,
+body[data-tema="oscuro"] .text-bg-light {
+    background-color: #293241 !important;
+    border-color: var(--color-borde) !important;
+    color: var(--color-texto) !important;
+}
+
+body[data-tema="oscuro"] .prioridad-alta {
+    background-color: #482b35;
+    color: #ff9aa9;
+}
+
+body[data-tema="oscuro"] .prioridad-media {
+    background-color: #493b25;
+    color: #ffd27b;
+}
+
+body[data-tema="oscuro"] .prioridad-baja {
+    background-color: #213e35;
+    color: #82d9ad;
+}
+
+body[data-tema="oscuro"] .acciones-tarea {
+    border-color: var(--color-borde);
+}
+
+body[data-tema="oscuro"] .btn-outline-secondary:hover {
+    background-color: #343d4c;
+    border-color: #4a5568;
+    color: var(--color-texto);
+}
+
+body[data-tema="oscuro"] .tarjeta-tarea:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Modales de tareas */
+.modal-tarea {
+    overflow: hidden;
+    border: 1px solid var(--color-borde);
+    border-radius: 16px;
+    background-color: var(--color-superficie);
+    color: var(--color-texto);
+    box-shadow: 0 24px 70px rgba(20, 25, 40, 0.2);
+}
+
+.modal-tarea .modal-header,
+.modal-tarea .modal-footer {
+    padding: 1.25rem 1.5rem;
+}
+
+.modal-tarea .modal-body {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.modal-tarea .form-label {
+    color: var(--color-texto);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.modal-icono {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-size: 20px;
+}
+
+.modal-icono-editar {
+    background-color: rgba(101, 88, 211, 0.12);
+    color: var(--color-primario);
+}
+
+.modal-icono-eliminar {
+    background-color: #fff0f0;
+    color: #cf4141;
+}
+
+.modal-confirmacion .modal-icono {
+    width: 56px;
+    height: 56px;
+    font-size: 23px;
+}
+
+.tarea-a-eliminar {
+    overflow-wrap: anywhere;
+    color: var(--color-texto);
+}
+
+body[data-tema="oscuro"] .modal-tarea .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+body[data-tema="oscuro"] .modal-tarea .btn-light {
+    border-color: var(--color-borde);
+    background-color: #293241;
+    color: var(--color-texto);
+}
+
+body[data-tema="oscuro"] .modal-icono-eliminar {
+    background-color: #482b35;
+    color: #ff9aa9;
+}
+
+body[data-tema="oscuro"] .alert-danger {
+    border-color: #713e49;
+    background-color: #482b35;
+    color: #ffb4be;
+}
+
+@media (max-width: 575.98px) {
+    .modal-tarea .modal-header,
+    .modal-tarea .modal-footer {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .modal-tarea .modal-body {
+        padding-right: 1rem;
+        padding-left: 1rem;
     }
 }

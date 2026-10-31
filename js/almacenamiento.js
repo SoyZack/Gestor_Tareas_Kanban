@@ -47,25 +47,3 @@ export function guardarTareas(tareas) {
         return false;
     }
 }
-
-// 3. Eliminar todas las tareas guardadas
-
-export function eliminarTareasGuardadas() {
-    try {
-        localStorage.removeItem(CLAVE_TAREAS);
-        return true;
-    } catch (error) {
-        console.error("Error al eliminar las tareas:", error);
-        return false;
-    }
-}
-
-// 4. Comprobar si existen tarea guardadas
-
-export function existenTareasGuardadas(){
-    try {
-        return localStorage.getItem(CLAVE_TAREAS) !== null;
-    } catch (error) {
-        console.error("Error al comprobar el almacenamiento", error);
-    }
-}
